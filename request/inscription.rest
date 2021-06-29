@@ -1,0 +1,15 @@
+GET http://localhost:8000/inscription
+
+###
+POST http://localhost:8000/inscription HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "   Ramoon",
+  "lastname": "    Perez",
+  "email": "ramnn.perez@gmail.com",
+  "numberCell":"+543743519395",
+  "locationOrigin":"Jardin America",
+  "distanceTravel": "40km",
+  "DNI": "41523991 "
+}
