@@ -1,6 +1,15 @@
 import Inscription from '../models/inscription.js'
 import { check, validationResult } from 'express-validator'
 
+const countInscription = async(req,res)=>{
+  try{
+    const listInscriptions = await Inscription.find()
+    const count = listInscriptions.length
+    res.status(200).send({count})
+  }catch (e) {
+    res.status(500).send({ message: e.message })
+  }
+}
 const getInscriptions = async (req, res) => {
   try {
     const listInscriptions = await Inscription.find().sort({ locationOrigin: 1 }).select({ _id: 0 }).exec()
@@ -33,4 +42,4 @@ const addInscription = async (req, res) => {
     res.status(500).send({ message: e.message })
   }
 }
-export { getInscriptions, addInscription }
+export { getInscriptions, addInscription ,countInscription}

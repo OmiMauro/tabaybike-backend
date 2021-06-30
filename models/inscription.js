@@ -22,12 +22,11 @@ const inscriptionSchema = new Schema({
   email: {
     type: String,
     lowercase: true,
-    trim: true,
-    match: [/\S+@\S+\.\S+/]
+    trim: true
+    /* match: [/\S+@\S+\.\S+/] */
   },
   numberCell: {
     type: String,
-
     trim: true
   },
   provinceOrigin: {
