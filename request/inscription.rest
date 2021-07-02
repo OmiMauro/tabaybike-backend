@@ -11,5 +11,11 @@ Content-Type: application/json
   "numberCell":"+543743519395",
   "locationOrigin":"Jardin America",
   "distanceTravel": "40km",
-  "DNI": "41523991 "
+  "DNI": "41123991 ",
+  "distanceTour": "30km"
 }
+###
+GET http://localhost:8000/inscription/length
+
+### 
+DELETE http://localhost:8000/inscription/delet HTTP/1.1

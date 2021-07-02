@@ -1,6 +1,6 @@
 import express from 'express'
 import { check } from 'express-validator'
-import { getInscriptions, addInscription, countInscription } from '../../controllers/inscriptionController.js'
+import { getInscriptions, addInscription, countInscription, deleteInscriptions } from '../../controllers/inscriptionController.js'
 
 const inscriptionRouter = express.Router()
 
@@ -16,5 +16,5 @@ inscriptionRouter.post('/', [
   // check('email', 'Deberia ser un email').isEmail()
 ], addInscription)
 inscriptionRouter.get('/length', countInscription)
-
+inscriptionRouter.delete('/delete', deleteInscriptions)
 export default inscriptionRouter
