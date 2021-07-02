@@ -13,3 +13,5 @@ Content-Type: application/json
   "distanceTravel": "40km",
   "DNI": "41523991 "
 }
+### 
+GET http://localhost:8000/inscription/length HTTP/1.1
