@@ -31,12 +31,16 @@ const inscriptionSchema = new Schema({
   },
   provinceOrigin: {
     type: String,
-    trim: true
+    trim: true,
+    required: [true, 'La provincia de origen es obligatorio. ']
+
   },
   locationOrigin: {
     type: String,
     default: 'Other',
-    trim: true
+    trim: true,
+    required: [true, 'La localidad de origen es obligatorio']
+
   },
   distanceTour: {
     type: String,
