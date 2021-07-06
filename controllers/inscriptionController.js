@@ -23,7 +23,7 @@ const addInscription = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors }) // if client get any error the code will pass here you can do anything according to your choice
     }
-    const { name, lastname, email, numberCell, provinceOrigin, locationOrigin, distanceTour, DNI } = req.body
+    const { name, lastname, email, numberCell, provinceOrigin, locationOrigin, distanceTour, DNI, almuerzo } = req.body
     const newInscription = new Inscription({
       name,
       lastname,
@@ -32,7 +32,8 @@ const addInscription = async (req, res) => {
       provinceOrigin,
       locationOrigin,
       distanceTour,
-      DNI
+      DNI,
+      almuerzo
     })
     const savedInscription = await newInscription.save()
     res.status(201).json({ message: 'Su inscripcion fue registrada con exito! Te esperamos!', savedInscription })

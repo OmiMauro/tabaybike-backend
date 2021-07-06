@@ -45,6 +45,10 @@ const inscriptionSchema = new Schema({
   distanceTour: {
     type: String,
     required: [true, 'El recorrido a realizar es obligatorio']
+  },
+  almuerzo: {
+    type: Boolean,
+    required: [true, 'El campo almuerzo es obligatorio, ']
   }
 }, {
   timestamps: true
