@@ -1,10 +1,10 @@
 import express from 'express'
 import { check } from 'express-validator'
-import { addInscription, countInscription , getInscriptions } from '../../controllers/inscriptionController.js'
+import { addInscription, countInscription, getInscriptions } from '../../controllers/inscriptionController.js'
 
 const inscriptionRouter = express.Router()
 
-inscriptionRouter.get('/', getInscriptions)
+/* inscriptionRouter.get('/', getInscriptions) */
 inscriptionRouter.post('/', [
   check('name', 'Deberia ser un nombre').notEmpty().trim().escape(),
   check('lastname', 'Deberia ser un apellido').notEmpty().trim().escape()
@@ -15,6 +15,6 @@ inscriptionRouter.post('/', [
   // check('distanceTour', 'Deberia ser un recorrido').notEmpty().trim().escape(),
   // check('email', 'Deberia ser un email').isEmail()
 ], addInscription)
-inscriptionRouter.get('/length', countInscription)
-
+/* inscriptionRouter.get('/length', countInscription)
+ */
 export default inscriptionRouter
