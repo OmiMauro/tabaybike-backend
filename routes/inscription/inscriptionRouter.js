@@ -6,10 +6,10 @@ const inscriptionRouter = express.Router()
 
 inscriptionRouter.get('/', getInscriptions)
 inscriptionRouter.post('/', [
-  check('name', 'Deberia ser un nombre').notEmpty().trim().escape(),
-  check('lastname', 'Deberia ser un apellido').notEmpty().trim().escape()
+  check('name', 'Deberia ser un nombre').notEmpty().trim().escape().toUpperCase(),
+  check('lastname', 'Deberia ser un apellido').notEmpty().trim().escape().toUpperCase(),
   // check('numberCell', 'Deberia ser un numero telefono/celular').trim().escape(),
-  // check('DNI', 'Deberia ser un DNI sin puntos ni espacios').notEmpty().trim().isLength({ min: 7, max: 8 }).blacklist('.'),
+  check('DNI', 'Deberia ser un DNI sin puntos ni espacios').notEmpty().trim().isLength({ min: 7, max: 9 }).blacklist('.')
   // check('provinceOrigin', 'Deberia ser una Provincia').trim().escape(),
   // check('locationOrigin', 'Deberia ser una Localidad').trim().escape(),
   // check('distanceTour', 'Deberia ser un recorrido').notEmpty().trim().escape(),
