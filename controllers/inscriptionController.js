@@ -36,7 +36,7 @@ const addInscription = async (req, res) => {
       almuerzo
     })
     const savedInscription = await newInscription.save()
-    res.status(201).json({ message: 'Su inscripcion fue registrada con exito! Te esperamos!', savedInscription })
+    res.status(201).json({ message: 'Su inscripcion fue registrada con exito! Te esperamos!' })
     // res.status(200).json({ messageInscription: 'Su inscripcion fue registrada con exito! Te esperamos!', savedInscription })
   } catch (e) {
     res.status(500).json({ message: e.message })

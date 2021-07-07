@@ -1,10 +1,10 @@
 import express from 'express'
 import { check } from 'express-validator'
-import { addInscription, countInscription } from '../../controllers/inscriptionController.js'
+import { addInscription, countInscription , getInscriptions } from '../../controllers/inscriptionController.js'
 
 const inscriptionRouter = express.Router()
 
-// inscriptionRouter.get('/', getInscriptions)
+inscriptionRouter.get('/', getInscriptions)
 inscriptionRouter.post('/', [
   check('name', 'Deberia ser un nombre').notEmpty().trim().escape(),
   check('lastname', 'Deberia ser un apellido').notEmpty().trim().escape()

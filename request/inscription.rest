@@ -1,3 +1,4 @@
+
 GET http://localhost:8000/inscription
 
 ###
@@ -10,8 +11,11 @@ Content-Type: application/json
   "email": "ramnn.perez@gmail.com",
   "numberCell":"+543743519395",
   "locationOrigin":"Jardin America",
-  "distanceTravel": "40km",
-  "DNI": "41523991 "
+  "distanceTour": "40km",
+  "DNI": "4123915",
+  "provinceOrigin":"Misiones",
+  "locationOrigin":"Jardín América",
+  "almuerzo":"true"
 }
 ### 
 GET http://localhost:8000/inscription/length HTTP/1.1
