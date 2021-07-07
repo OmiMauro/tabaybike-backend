@@ -1,3 +1,4 @@
+
 GET http://localhost:8000/inscription
 
 ###
@@ -18,4 +19,4 @@ Content-Type: application/json
 GET http://localhost:8000/inscription/length
 
 ### 
-DELETE http://localhost:8000/inscription/delet HTTP/1.1
+DELETE http://localhost:8000/inscription/delete HTTP/1.1
