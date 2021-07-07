@@ -12,7 +12,7 @@ const countInscription = async (req, res) => {
 }
 const getInscriptions = async (req, res) => {
   try {
-    const listInscriptions = await Inscription.find().sort({ locationOrigin: 1 }).select({ _id: 0 }).exec()
+    const listInscriptions = await Inscription.find().sort({ lastname: 1, provinceOrigin: 1 }).select({ _id: 0 }).lean().exec()
     res.status(200).send({ listInscriptions })
   } catch (e) {
     res.status(500).send({ message: e.message })
