@@ -1,71 +1,62 @@
+import Inscription from '../models/inscription.js'
 import PDFDocument from 'pdfkit'
 import fs from 'fs'
-const generarPDFInscripcion = async(req,res)=>{
+const generarPDFInscripcion = async (req, res) => {
+  const listInscriptions = await Inscription.find({}).sort({ lastname: 1, name: 1 }).lean()
+  const date = new Date().getDate()
   const pdf = new PDFDocument({
-    
+    size: 'A4',
+    margin: 10,
+    font: 'Times-Roman',
+    info: {
+      Title: 'Inscripcion al IV Encuentro Provincial de MTB',
+      Author: 'Tabay Bike'
+    }
   })
+  for (let i = 1; i <= 20; i++) {
+  // Write stuff into PDF
+    pdf.moveDown()
+      .fillColor('black')
+      .fontSize(16)
+      .text(`Inscripción para el IV Encuentro provincial de MTB.\n ${date}`, {
+        align: 'center',
+        indent: 2,
+        height: 5,
+        underline: true
+      })
+    pdf.moveDown()
+      .fillColor('black')
+      .fontSize(14)
+      .text('Datos del participante:', {
+        align: 'center',
+        indent: 2,
+        height: 2,
+        ellipsis: true
+      })
+    pdf.moveDown()
+      .fillColor('black')
+      .fontSize(13)
+      .text(`Declaro que Nombre: ${listInscriptions[i].name},   Apellido:  ${listInscriptions[i].lastname} ,       cuyo DNI es:   ${listInscriptions[i].DNI}   ,     soy completamente responsable de mi propia integridad física en todo momento en la participación,      dejando libre de responsabilidades      a todos los organizadores del evento y auspiciantes. `, {
+        align: 'justify',
+        width: 500
+      })
+    pdf.moveDown()
+      .fontSize(13)
+      .text('Firma                                  Aclaración                            DNI', {
+        columnsGap: 50,
+        columns: 1,
+        x: 5
+      })
+    pdf.rect(50, 50, pdf.widthOfString(), pdf.y).stroke()
+
+    pdf.addPage()
+  }
+  // Stream contents to a file
+  pdf.pipe(fs.createWriteStream('prueba.pdf')).on('finish', function () {
+    console.log('Archivo creado satisfactoriamente ....')
+  })
+
+  pdf.end()
 }
 
-router.post('/pagar',function(req,res){
-	var nombre = req.body.nombre;
-    var apellidoPaterno = req.body.apellidoPaterno;
-    var apellidoMaterno = req.body.apellidoMaterno;
-    var fs = require('fs');
-    var PDFDocument = require('pdfkit');
-    
-    var pdf = new PDFDocument({
-        //size: 'LEGAL', 
-        layout: 'landscape',
-        size: [210, 210], 
-        margin: 5,     
-        info: {    
-             Title: 'Recibo de agua potable',
-             Author: 'Comite de agua potable 2018',
-        }  
-    });
-
-    // Write stuff into PDF
-    pdf.moveDown()
-         .fillColor('black')
-         .fontSize(7)
-         .text('EJEMPLO DE DOCUMENTO PDF', {
-           align: 'center',
-           indent: 2,
-           height: 2,
-           ellipsis: true
-         });
-         
-
-    pdf.moveDown()
-         .fillColor('black')
-         .fontSize(7)
-         .text('NOMBRE DE PERSONAS DESDE FORMULARIO', {
-           align: 'center',
-           indent: 2,
-           height: 2,
-           ellipsis: true
-         });
-          
-
-
-     pdf.moveDown()
-         .fillColor('black')
-         .fontSize(8)
-         .text('NOMBRE: '+nombre+' '+ apellidoPaterno +' '+ apellidoMaterno , {
-           align: 'left',
-           indent: 2,
-           height: 2,
-           ellipsis: true
-         });
-
-
-      // Stream contents to a file
-     pdf.pipe(fs.createWriteStream(nombre+"_"+apellidoPaterno+"_"+apellidoMaterno+'.pdf')).on('finish', function () {
-        console.log('Archivo creado satisfactoriamente ....');
-     });
- 
-     pdf.end();
-
-});
-
-module.exports = router;
+export default generarPDFInscripcion

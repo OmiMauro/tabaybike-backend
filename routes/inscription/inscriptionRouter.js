@@ -1,7 +1,7 @@
 import express from 'express'
 import { check } from 'express-validator'
 import { getInscriptions, addInscription, countInscription, deleteInscriptions } from '../../controllers/inscriptionController.js'
-
+import generarPDFInscripcion from '../../controllers/reportesController.js'
 const inscriptionRouter = express.Router()
 
 inscriptionRouter.get('/', getInscriptions)
@@ -17,4 +17,6 @@ inscriptionRouter.post('/', [
 ], addInscription)
 inscriptionRouter.get('/length', countInscription)
 inscriptionRouter.delete('/delete', deleteInscriptions)
+
+inscriptionRouter.get('/pdf', generarPDFInscripcion)
 export default inscriptionRouter
