@@ -4,11 +4,20 @@ import { check, validationResult } from 'express-validator'
 const countInscription = async (req, res) => {
   try {
     const listInscriptions = await Inscription.find().countDocuments()
-    const count = listInscriptions.length
     res.status(200).send({ listInscriptions })
   } catch (e) {
     res.status(500).send({ message: e.message })
   }
+}
+const countAlmuerzo = async (req,res)=>{
+  try{
+    const countTrue = await Inscription.find({almuerzo:1}).countDocuments()
+    const countFalse = await Inscription.find({almuerzo:0}).countDocuments()
+    res.status(200).send({almuerzan: countTrue,noAlmuerzan:countFalse})
+  }
+} catch (e) {
+  res.status(500).send({ message: e.message })
+}
 }
 const getInscriptions = async (req, res) => {
   try {
@@ -50,4 +59,5 @@ const deleteInscriptions = async (req, res) => {
     res.status(501).json({ message: e.message })
   }
 }
-export { getInscriptions, addInscription, countInscription, deleteInscriptions }
+
+export { getInscriptions, addInscription, countInscription, deleteInscriptions, countAlmuerzo }
