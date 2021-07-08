@@ -22,3 +22,6 @@ GET http://localhost:8000/inscription/length
 DELETE http://localhost:8000/inscription/delet HTTP/1.1
 ###
 GET http://localhost:8000/inscription/pdf
+
+###
+GET http://localhost:8000/inscription/almuerzo

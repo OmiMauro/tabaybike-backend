@@ -6,22 +6,21 @@ const generarPDFInscripcion = async (req, res) => {
   const date = new Date().getDate()
   const pdf = new PDFDocument({
     size: 'A4',
-    margin: 10,
     font: 'Times-Roman',
     info: {
       Title: 'Inscripcion al IV Encuentro Provincial de MTB',
       Author: 'Tabay Bike'
     }
   })
-  for (let i = 1; i <= 20; i++) {
+  console.log(listInscriptions.length)
+  for (let i = 1; i < listInscriptions.length; i++) {
   // Write stuff into PDF
     pdf.moveDown()
       .fillColor('black')
       .fontSize(16)
       .text(`Inscripción para el IV Encuentro provincial de MTB.\n ${date}`, {
         align: 'center',
-        indent: 2,
-        height: 5,
+
         underline: true
       })
     pdf.moveDown()
@@ -45,9 +44,10 @@ const generarPDFInscripcion = async (req, res) => {
       .text('Firma                                  Aclaración                            DNI', {
         columnsGap: 50,
         columns: 1,
-        x: 5
+        paragraphGap: 50
       })
-    pdf.rect(50, 50, pdf.widthOfString(), pdf.y).stroke()
+    pdf.moveDown().fontSize(250).text(`${i}`, { align: 'center', width: 500 })
+      .fontSize(30).text(` ${listInscriptions[i].lastname}, ${listInscriptions[i].name}`, { align: 'center' })
 
     pdf.addPage()
   }
