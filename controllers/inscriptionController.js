@@ -51,6 +51,13 @@ const addInscription = async (req, res) => {
     res.status(500).send({ message: e.message })
   }
 }
+const countTour = async (req, res) => {
+  try {
+    const sesentakm = await Inscription.find({ distanceTour: '57km' }).countDocuments()
+    const treintakm = await Inscription.find({ distanceTour: '29km' }).countDocuments()
+    res.status(200).send({ total: sesentakm + treintakm, '57km': sesentakm, '29km': treintakm })
+  } catch (e) { res.status(500).send({ message: e.message }) }
+}
 /* const deleteInscriptions = async (req, res) => {
   try {
     const response = await Inscription.deleteMany()
@@ -60,4 +67,4 @@ const addInscription = async (req, res) => {
   }
 } */
 
-export { getInscriptions, addInscription, countInscription, countAlmuerzo }
+export { getInscriptions, addInscription, countInscription, countAlmuerzo, countTour }

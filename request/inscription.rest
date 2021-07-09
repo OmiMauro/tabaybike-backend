@@ -25,3 +25,6 @@ GET http://localhost:8000/inscription/pdf
 
 ###
 GET http://localhost:8000/inscription/almuerzo
+###
+GET http://localhost:8000/inscription/lengthTours
+

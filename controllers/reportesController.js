@@ -3,7 +3,6 @@ import PDFDocument from 'pdfkit'
 import fs from 'fs'
 const generarPDFInscripcion = async (req, res) => {
   const listInscriptions = await Inscription.find({}).sort({ lastname: 1, name: 1 }).lean()
-  const date = new Date().getDate()
   const pdf = new PDFDocument({
     size: 'A4',
     font: 'Times-Roman',
@@ -18,19 +17,16 @@ const generarPDFInscripcion = async (req, res) => {
     pdf.moveDown()
       .fillColor('black')
       .fontSize(16)
-      .text(`Inscripción para el IV Encuentro provincial de MTB.\n ${date}`, {
+      .text('Inscripción para el IV Encuentro provincial de MTB.', {
         align: 'center',
-
         underline: true
       })
     pdf.moveDown()
       .fillColor('black')
       .fontSize(14)
       .text('Datos del participante:', {
-        align: 'center',
-        indent: 2,
-        height: 2,
-        ellipsis: true
+        align: 'center'
+
       })
     pdf.moveDown()
       .fillColor('black')
@@ -46,8 +42,8 @@ const generarPDFInscripcion = async (req, res) => {
         columns: 1,
         paragraphGap: 50
       })
-    pdf.moveDown().fontSize(250).text(`${i}`, { align: 'center', width: 500 })
-      .fontSize(30).text(` ${listInscriptions[i].lastname}, ${listInscriptions[i].name}`, { align: 'center' })
+    pdf.moveDown().fontSize(270).text(`${i}`, { align: 'center', valign: 'center' })
+      .fontSize(25).text(` ${listInscriptions[i].lastname}, ${listInscriptions[i].name}`, { align: 'center', valign: 'center' })
 
     pdf.addPage()
   }
