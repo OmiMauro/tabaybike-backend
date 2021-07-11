@@ -20,7 +20,7 @@ const countAlmuerzo = async (req, res) => {
 }
 const getInscriptions = async (req, res) => {
   try {
-    const listInscriptions = await Inscription.find().sort({ lastname: 1, name: 1 }).select({ _id: 0 }).lean().exec()
+    const listInscriptions = await Inscription.find().sort({ provinceOrigin: 1, locationOrigin: 1 }).select({ _id: 0 }).lean().exec()
 
     res.status(200).send({ listInscriptions })
   } catch (e) {
