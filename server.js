@@ -6,7 +6,7 @@ console.log(uri)
 const initApp = async (uri) => {
   try {
     await connectDB(uri)
-    App.listen(process.env.PORT, () => console.log(`running in ${process.env.PORT}`))
+    App.listen(process.env.PORT, () => console.log('running server'))
   } catch (e) {
     console.log(e)
     process.exit(0)
