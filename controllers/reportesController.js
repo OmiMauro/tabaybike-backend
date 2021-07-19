@@ -19,7 +19,7 @@ const generarPDFInscripcion = async (req, res) => {
       })
     pdf.moveDown()
       .fillColor('black')
-      .fontSize(12).font('Helvetica')
+      .fontSize(12).font('Helvetica-Bold')
       .text('Deslinde de Responsabilidad: ', {
         align: 'left'
       })
@@ -36,7 +36,7 @@ const generarPDFInscripcion = async (req, res) => {
       .fontSize(11).font('Helvetica').text('Apellido y Nombre/s: ', { continued: true }).font('Helvetica-Bold').text(`${listInscriptions[i].lastname}, ${listInscriptions[i].name}.`)
     pdf.moveDown().fontSize(11).font('Helvetica').text('DNI: ', { continued: true }).font('Helvetica-Bold').text(`${listInscriptions[i].DNI}`)
     pdf.moveDown().fontSize(11).font('Helvetica').text('Lugar de precedencia: ', { continued: true }).font('Helvetica-Bold').text(`${listInscriptions[i].locationOrigin !== 'Otro' ? listInscriptions[i].locationOrigin : '______________________'}, ${listInscriptions[i].provinceOrigin}.`)
-    pdf.moveDown().fontSize(11).font('Helvetica').text('Medio de contacto: ', { continued: true }).font('Helvetica-Bold').text(`${listInscriptions[i].numberCell ? listInscriptions[i].numberCell : listInscriptions[i].email}`)
+    pdf.moveDown().fontSize(11).font('Helvetica').text(`${listInscriptions[i].numberCell ? 'Celular' : 'Email'} `, { continued: true }).font('Helvetica-Bold').text(`${listInscriptions[i].numberCell ? listInscriptions[i].numberCell : listInscriptions[i].email}`)
     pdf.moveDown()
     pdf.moveDown().fontSize(11).font('Helvetica-Bold').text('Firma del participante', { align: 'right' })
     pdf.addPage()
