@@ -2,6 +2,8 @@ import Inscription from '../models/inscription.js'
 import PDFDocument from 'pdfkit'
 import fs from 'fs'
 const generarPDFInscripcion = async (req, res) => {
+  const fecha = new Date()
+
   const listInscriptions = await Inscription.find({}).sort({ lastname: 1, name: 1, DNI: 1, locationOrigin: 1, provinceOrigin: 1 }).lean()
   const pdf = new PDFDocument({
     size: 'A4',
@@ -39,10 +41,13 @@ const generarPDFInscripcion = async (req, res) => {
     pdf.moveDown().fontSize(11).font('Helvetica').text(`${listInscriptions[i].numberCell ? 'Celular' : 'Email'} `, { continued: true }).font('Helvetica-Bold').text(`${listInscriptions[i].numberCell ? listInscriptions[i].numberCell : listInscriptions[i].email}`)
     pdf.moveDown()
     pdf.moveDown().fontSize(11).font('Helvetica-Bold').text('Firma del participante', { align: 'right' })
+    pdf.moveDown().fontSize(11).font('Helvetica-Bold').text(`${i+1}`,{align: 'center',
+      lineBreak: false})
     pdf.addPage()
   }
+  
   // Stream contents to a file
-  pdf.pipe(fs.createWriteStream('TabayBikeInscripciones.pdf')).on('finish', function () {
+pdf.pipe(fs.createWriteStream(`TabayBike-${fecha.getHours()}-${fecha.getMinutes()}.pdf`)).on('finish', function () {
     console.log('Archivo creado satisfactoriamente ....')
   })
 
